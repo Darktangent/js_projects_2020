@@ -2,6 +2,7 @@
 // custom script file- **Start**
 const defaultResult = 0;
 let currentResult = defaultResult;
+let logEntries = [];
 // gets input from input field and converts it into a int for calculation
 function getUserNumberInput() {
 	return parseInt(userInput.value);
@@ -16,15 +17,26 @@ function add() {
 	const enteredNumber = getUserNumberInput();
 	// const calcDescription = `${currentResult} + ${enteredNumber}`;
 	const initialResult = currentResult;
-	currentResult = currentResult + enteredNumber;
+	currentResult += enteredNumber;
 	// outputResult(currentResult, calcDescription);
 	createAndWriteLog('+', initialResult, enteredNumber);
+	// logEntries = [enteredNumber]
+	const logEntry = {
+		operation: 'Add',
+		previousResult: initialResult,
+		number: enteredNumber,
+		result: currentResult
+	};
+	logEntries.push(logEntry);
+	console.log(logEntry.operation);
+
+	console.log(logEntries);
 }
 function subtract() {
 	const enteredNumber = getUserNumberInput();
 	// const calcDescription = `${currentResult} - ${enteredNumber}`;
 	const initialResult = currentResult;
-	currentResult = currentResult - enteredNumber;
+	currentResult -= enteredNumber;
 	// outputResult(currentResult, calcDescription);
 	createAndWriteLog('-', initialResult, enteredNumber);
 }
@@ -32,7 +44,7 @@ function multiply() {
 	const enteredNumber = getUserNumberInput();
 	// const calcDescription = `${currentResult} * ${enteredNumber}`;
 	const initialResult = currentResult;
-	currentResult = currentResult * enteredNumber;
+	currentResult *= enteredNumber;
 	// outputResult(currentResult, calcDescription);
 	createAndWriteLog('*', initialResult, enteredNumber);
 }
@@ -40,9 +52,9 @@ function divide() {
 	const enteredNumber = getUserNumberInput();
 	// const calcDescription = `${currentResult} / ${enteredNumber}`;
 	const initialResult = currentResult;
-	currentResult = currentResult / enteredNumber;
+	currentResult /= enteredNumber;
 	// outputResult(currentResult, calcDescription);
-	console.log(enteredNumber, calcDescription, outputResult);
+	// console.log(enteredNumber, calcDescription, outputResult);
 	createAndWriteLog('/', initialResult, enteredNumber);
 }
 // add(1, 2);
