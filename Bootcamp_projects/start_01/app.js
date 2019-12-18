@@ -169,3 +169,176 @@ const student = {
 	}
 };
 // loops
+// for loop
+
+for (let i = 0; i <= 10; i++) {
+	console.log(i);
+}
+
+const animals = ['lions', 'tigers', 'bears'];
+for (let i = 0; i < animals.length; i++) {
+	console.log(i, animals[i]);
+}
+const students = [
+	{
+		firstName: 'Zeus',
+		grade: 89
+	},
+	{
+		firstName: 'Randy',
+		grade: 84
+	},
+	{
+		firstName: 'Paul',
+		grade: 99
+	}
+];
+for (let i = 0; i < students.length; i++) {
+	console.log(i, students[i]);
+	let student = students[i];
+	console.log(`${student.firstName} scored  ${student.grade}`);
+}
+let str = 'Rohan Ganguly';
+for (let i = 0; i <= 3; i++) {
+	console.log('Outer', i);
+	for (j = 0; j <= str.length; j++) {
+		console.log('Inner:', str[j]);
+	}
+}
+let gameBoard = [
+	[4, 32, 10, 20],
+	[3, 53, 38, 10],
+	[2, 13, 23, 9],
+	[9, 3, 4, 8]
+];
+let totalScore = 0;
+for (let i = 0; i < gameBoard.length; i++) {
+	let row = gameBoard[i];
+	let sum = 0;
+	console.log(row);
+	for (let j = 0; j < row.length; j++) {
+		console.log(row[j]);
+		sum += row[j];
+	}
+	console.log(`${row} summed to ${sum}`);
+}
+const jeopardyWinnings = {
+	regularPLay: 320000,
+	watsonChallenge: 4000000,
+	tournamentOfChampions: 6000000,
+	battleOfTheDecades: 10000000
+};
+
+for (let props in jeopardyWinnings) {
+	console.log(props);
+	console.log(jeopardyWinnings[props]);
+}
+let totalWin = 0;
+for (let props in jeopardyWinnings) {
+	// console.log(props);
+	totalWin += jeopardyWinnings[props];
+	console.log(jeopardyWinnings[props]);
+}
+console.log(`Total winning is ${totalWin}`);
+// functions
+function rollDie() {
+	let roll = Math.floor(Math.random() * 6) + 1;
+	console.log(`Rolled, ${roll}`);
+}
+// rollDie();
+function ThrowDie(numRolls) {
+	for (let i = 0; i < numRolls; i++) {
+		rollDie();
+	}
+}
+ThrowDie(50);
+
+function greet(name) {
+	console.log(`Hi ${name}`);
+}
+greet('Rohan');
+function square(num) {
+	return num * num;
+}
+square(5);
+function sum(x, y) {
+	return x + y;
+}
+let totalSum = sum(4, 20);
+console.log(totalSum);
+function isPurple(color) {
+	if (color.toLowerCase() === 'purple') {
+		return true;
+	}
+	return false;
+}
+isPurple('blue');
+function isValidPassword(pass, username) {
+	return (
+		pass.length >= 8 && pass.indexOf(' ') !== -1 && !pass.includes(username)
+	);
+}
+const check = isValidPassword('123rohan', 'rohan');
+console.log(check);
+
+function findAvg(arr) {
+	let avg;
+	let total = 0;
+	for (num of arr) {
+		total += num;
+	}
+	avg = total / arr.length;
+	return avg;
+}
+findAvg([1, 2, 3, 4, 5, 8]);
+
+// pangram
+
+function isPangram(params) {
+	let arr = [
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'f',
+		'g',
+		'h',
+		'i',
+		'j',
+		'k',
+		'l',
+		'm',
+		'n',
+		'o',
+		'p',
+		'u',
+		'v',
+		'w',
+		'x',
+		'y',
+		'z'
+	];
+	for (let char of arr) {
+		if (params.toLowerCase().indexOf(char) === -1) {
+			return false;
+		}
+	}
+	return true;
+}
+// practice
+function pick(arr) {
+	const idx = Math.floor(Math.random() * arr.length);
+	return arr[idx];
+}
+function getCard() {
+	let val = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+	let suit = ['clubs', 'spades', 'hearts', 'diamonds'];
+	// let randIdx = Math.floor(Math.random() * val.length);
+	// let randSuit = Math.floor(Math.random() * suit.length);
+	const randValue = pick(val);
+	const randSuit = pick(suit);
+	// return { val: val[randIdx], suit: suit[randSuit] };
+	return { val: randValue, suit: randSuit };
+}
+getCard();
