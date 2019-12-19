@@ -342,3 +342,115 @@ function getCard() {
 	return { val: randValue, suit: randSuit };
 }
 getCard();
+// scope-variable visibility
+// func scope
+function lol() {
+	let person = 'TOm'; //no available outside
+	const age = 44; //not available outside
+	var color = 'teal'; //not available outside
+}
+//fn expression
+// const square = function(nums) {
+// 	return num * num;
+// };
+// square(7);
+// callback-pass fn into another fn
+// setTimeout(() => {
+// 	alert('Test Callback');
+// }, 3000);
+
+const btn = document.querySelector('button');
+btn.addEventListener('click', function() {
+	alert('Testing Event firing');
+});
+// forEach
+const nums = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+nums.forEach(function(num) {
+	console.log(num * num);
+});
+
+nums.forEach((num, idx) => {
+	if (num % 2 === 0) {
+		console.log(num, idx);
+	}
+});
+// map - new arraw from existing array
+const texts = ['rofl', 'lol', 'lmao', 'omg'];
+const caps = texts.map(function(text) {
+	return text
+		.toUpperCase()
+		.split('')
+		.join('.');
+});
+console.log(caps);
+const numDetail = nums.map(num => {
+	return {
+		value: num,
+		isEven: num % 2 === 0
+	};
+});
+console.log(numDetail);
+
+const mySquare = num => {
+	return x * x;
+};
+const isEven = n => {
+	return num % 2 === 0;
+};
+// find
+let movies = [
+	'The Fantastic Mr. Fox',
+	'Mr. Deeds',
+	'Mr. and Mrs. Fox',
+	'Mrs. Doubtfire'
+];
+let movie = movies.find(movie => {
+	return movie.includes('Mrs.');
+});
+console.log(movie);
+
+const odds = nums.filter(n => {
+	return n % 2 === 1;
+});
+
+const smallNums = nums.filter(n => n < 5);
+// every and some
+const myList1 = ['dog', 'dig', 'log', 'bag', 'wag'];
+
+const threeLetWords = myList1.every(el => {
+	return AudioWorkletNode.length === 3;
+});
+const endInG = myList1.every(el => {
+	const last = myList1.length - 1;
+	return myList1[last] === 'g';
+});
+// sort
+const prices = [10, 30, 9, 200, 100, 130];
+
+const sort = prices.sort((a, b) => a - b);
+// reduce - combines array into single value
+numsArr = [3, 5, 7, 9, 11];
+
+const prod = numsArr.reduce((acc, curr) => {
+	return acc * curr;
+});
+console.log(prod);
+
+const maxNum = numsArr.reduce((max, curr) => {
+	if (curr > max) {
+		return curr;
+	}
+	return max;
+});
+const votes = ['y', 'n', 'y', 'n', 'n', 'y', 'n', 'present'];
+const results = votes.reduce((tally, val) => {
+	console.log(tally, val);
+	if (tally[val]) {
+		// short->tally[val]=(tally[val]||0)+1
+		tally[val]++;
+	} else {
+		tally[val] = 1;
+	}
+	return tally;
+}, {});
+console.log(results);
