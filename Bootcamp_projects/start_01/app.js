@@ -454,3 +454,196 @@ const results = votes.reduce((tally, val) => {
 	return tally;
 }, {});
 console.log(results);
+// spread
+const nums1 = [1, 2, 3, 44, 59, 3, 21];
+const newArr = [...nums1, ...votes];
+console.log(newArr);
+
+Math.max(...nums1); //spreading iterrable into indiv args
+function giveMeFour(a, b, c, d) {
+	console.log('a', a);
+	console.log('b', b);
+	console.log('c', c);
+	console.log('d', d);
+}
+const feline = { legs: 4, family: 'Felidae' };
+const canine = { family: 'Canine', Furry: true };
+const dog = { ...canine, isPet: true };
+const lion = { ...feline, genus: 'Panthera' };
+const catDog = { ...feline, ...canine };
+
+// rest- opposite of spread-collects things down
+Math.max(1, 2, 3, 4, 5, 0);
+function sum1() {
+	const argsArr = [...arguments];
+	console.log(arguments);
+	return argsArr.reduce((total, currVal) => {
+		return total + currVal;
+	});
+}
+function newSum(...nums) {
+	let total = 0;
+	for (let n of nums) total += n;
+	return total;
+}
+newSum(1, 2, 4, 1000, 800);
+// destructuring array
+const raceResult = ['Eluid kipchoge', 'Feyisa lelisa', 'Galen', 'Ghirmay'];
+const [gold, silver, , bronze] = raceResult;
+console.log(bronze);
+
+const runner = [
+	{
+		first: 'Eluid',
+		second: 'Kipchoge'
+	},
+	{
+		first: 'Feyis',
+		second: 'lilesa'
+	}
+];
+// const { first: firstName, last } = runner;
+const [, { first }] = runner;
+//Object properties
+const getStats = arr => {
+	const max = Math.max(...arr);
+	const min = Math.max(...arr);
+	const sum = arr.reduce((sum, review) => sum + review);
+	const avg = sum / arr.length;
+	return {
+		max,
+		min,
+		sum,
+		avg
+	};
+};
+const reviews = [4.5, 5.0, 3.44, 2.8, 3.5, 4.0, 3.5];
+const stats = getStats(reviews);
+
+const role = 'host';
+const person = 'Jools Holland';
+const role2 = 'Director';
+const person2 = 'James Cameron';
+
+const team = {
+	[role]: person,
+	[role2]: person2
+};
+// team[role] = person;
+// team[role2] = person2;
+console.log(team);
+// console.log(team[role]);
+
+function addProp(obj, k, v) {
+	return { ...obj, [k]: v };
+}
+const res1 = addProp(team, 'emoji', ':-}');
+
+//methods
+const math = {
+	multiply: function(x, y) {
+		return x * y;
+	},
+	divide(x, y) {
+		return x / y;
+	},
+	square(x) {
+		return x * x;
+	},
+	numbers: [1, 2, 3, 4, 5]
+};
+// keyword this- reference to current execution scope
+function sayHi() {
+	console.log('hi');
+	console.log(this); //window-execution scope
+}
+
+const person1 = {
+	first: 'cherylyn',
+	last: 'sarkisian',
+	nickname: 'Cher',
+	fullName() {
+		const { first, last, nickname } = this;
+		return `${first} ${last} AKA ${nickname}`;
+	},
+	printBio() {
+		const fullName = this.fullName();
+		console.log(`${fullName} is a person`);
+	}
+};
+const printBio = person1.printBio;
+
+const annoyer = {
+	phrases: ['Basically', 'Cray Cray', "I can't even", 'omfg', 'Essentially'],
+
+	pickPhrase() {
+		const { phrases } = this;
+		const idx = Math.floor(Math.random() * phrases.length);
+		return phrases[idx];
+	},
+	start() {
+		this.timerId = setInterval(() => {
+			console.log(this.pickPhrase());
+		}, 3000);
+	},
+	stop() {
+		clearInterval(this.timerId);
+	}
+};
+// deck of cards
+
+function makeMyDeck() {
+	const deck = [];
+	const val = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+	const suits = ['clubs', 'spades', 'hearts', 'diamonds'];
+	for (let value of val) {
+		for (let suit of suits) {
+			deck.push({ value, suit });
+		}
+	}
+	return deck;
+}
+function drawCard(deck) {
+	return deck.pop();
+}
+// const myDeck = makeMyDeck();
+// const card1 = drawCard(myDeck);
+
+const myDeck = {
+	deck: [],
+	drawnCards: [],
+	suits: ['clubs', 'spades', 'hearts', 'diamonds'],
+	val: [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'],
+	initializeDeck() {
+		// const deck = [];
+		// const val = ;
+		// const suits =
+		const { suits, val, deck } = this;
+		for (let value of val) {
+			for (let suit of suits) {
+				deck.push({ value, suit });
+			}
+		}
+		// return deck;
+	},
+	drawCard() {
+		const card = this.deck.pop();
+		this.drawnCards.push(card);
+		return card;
+	},
+	drawMultiple(numCards) {
+		const cards = [];
+		for (let i = 0; i < numCards; i++) {
+			cards.push(this.drawCard());
+		}
+		return cards;
+	},
+	shuffle() {
+		const { deck } = this;
+		for (let i = deck.length - 1; i > 0; i--) {
+			let j = Math.floor(Math.random * (i + 1));
+			[deck[i], deck[j]] = [deck[j], deck[i]];
+			console.log(deck);
+		}
+	}
+};
