@@ -84,13 +84,32 @@ const warriorsGames = [
 		}
 	}
 ];
-const ulParent = document.createElement('ul');
+const makeChart = (games, targetTeam) => {
+	const ulParent = document.createElement('ul');
 
-for (let game of warriorsGames) {
-	const { homeTeam, awayTeam } = game;
+	for (let game of games) {
+		const { homeTeam, awayTeam } = game;
+		const gameLi = document.createElement('li');
+		gameLi.innerHTML = getScoreLine(game);
+
+		gameLi.classList.add(isWinning(game, targetTeam) ? 'win' : 'loss');
+
+		// const warriors = hTeam === 'Golden State' ? homeTeam : awayTeam;
+		// gameLi.classList.add(warriors.isWinner ? 'win' : 'loss');
+
+		// console.log(warriors);
+
+		// gameLi.innerHTML = `${teamNames} ${scoreLine}`;
+		// console.log(scoreLine);
+
+		// console.log(awayTeam.team, homeTeam.team);
+		ulParent.appendChild(gameLi);
+	}
+	return ulParent;
+};
+const getScoreLine = ({ homeTeam, awayTeam }) => {
 	const { team: hTeam, points: hPoints } = homeTeam;
 	const { team: aTeam, points: aPoints } = awayTeam;
-	const gameLi = document.createElement('li');
 	const teamNames = `${aTeam} @ ${hTeam}`;
 	let scoreLine;
 	if (aPoints > hPoints) {
@@ -98,14 +117,19 @@ for (let game of warriorsGames) {
 	} else {
 		scoreLine = `${aPoints} - <b>${hPoints}</b>`;
 	}
-	const warriors = hTeam === 'Golden State' ? homeTeam : awayTeam;
-	gameLi.classList.add(warriors.isWinner ? 'win' : 'loss');
-	console.log(warriors);
+	return `${teamNames} ${scoreLine}`;
+};
+const isWinning = ({ homeTeam, awayTeam }, targetTeam) => {
+	const target = homeTeam.team === targetTeam ? homeTeam : awayTeam;
+	return target.isWinner;
+};
+const gsSection = document.querySelector('#gs');
+const hrSection = document.querySelector('#hr');
 
-	gameLi.innerHTML = `${teamNames} ${scoreLine}`;
-	console.log(scoreLine);
-
-	console.log(awayTeam.team, homeTeam.team);
-	ulParent.appendChild(gameLi);
-}
-document.body.prepend(ulParent);
+const gsChart = makeChart(warriorsGames, 'Golden State');
+const hrChart = makeChart(warriorsGames, 'Houston');
+// const chart2 = makeChart(warriorsGames, 'Houston');
+// document.body.prepend(gsChart);
+// document.body.prepend(chart2);
+gsSection.appendChild(gsChart);
+hrSection.appendChild(hrChart);
